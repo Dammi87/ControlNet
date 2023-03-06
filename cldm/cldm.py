@@ -292,6 +292,7 @@ class ControlNet(nn.Module):
         h = x.type(self.dtype)
         for module, zero_conv in zip(self.input_blocks, self.zero_convs):
             if guided_hint is not None:
+                print(guided_hint.shape, h.shape)
                 h = module(h, emb, context)
                 h += guided_hint
                 guided_hint = None
