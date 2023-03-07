@@ -9,12 +9,30 @@ from parse import Result, parse_request, Attributes
 from canny import create_canny
 from resize import resize_save
 
+def get_attr(attrs: List[Attributes], name):
+    value = [a.value for a in attrs if a.trait_type == name].pop()
+    return value
+
 
 def create_prompt(source: str, target: str, root: str, attrs: List[Attributes]) -> Dict:
+    bg = get_attr(attrs, "Background")
+    skin = get_attr(attrs, "Skin Tone")
+    kb = get_attr(attrs, "Keyboard")
+    clothes = get_attr(attrs, "Clothes")
+
+    prompt = f'A man sitting at a desk in a {bg} style room'
+    if skin is not None:
+        prompt = f'{prompt} {skin} skin color' 
+    if clothes is not None:
+        prompt = f'{prompt} wearing {clothes} clothes' 
+    if kb is not None:
+        prompt = f'{prompt} {kb} themed keyboard' 
+
+    prompt = f'{prompt} digital art anime nerdstyle'
     return dict(
         source=source.replace(root, "")[1:],
         target=target.replace(root, "")[1:],
-        prompt="NerdStyle"
+        prompt=prompt
         #prompt=" ".join([f"{attr.trait_type}_{attr.value}" for attr in attrs])
     )
 
