@@ -14,7 +14,8 @@ def create_prompt(source: str, target: str, root: str, attrs: List[Attributes]) 
     return dict(
         source=source.replace(root, "")[1:],
         target=target.replace(root, "")[1:],
-        prompt=" ".join([f"{attr.trait_type}_{attr.value}" for attr in attrs])
+        prompt="NerdStyle"
+        #prompt=" ".join([f"{attr.trait_type}_{attr.value}" for attr in attrs])
     )
 
 def download_image(url: str, file_path, file_name) -> str:
@@ -43,5 +44,5 @@ def create_dataset(dataset_name: str, request: Dict) -> None:
 
 if __name__ == "__main__":
     from crawler import get_nfts
-    request_result = get_nfts(10)
+    request_result = get_nfts(100)
     create_dataset("Entreprenerdz", request_result)

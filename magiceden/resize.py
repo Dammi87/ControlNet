@@ -12,7 +12,7 @@ def resize_save(path: Union[str, np.array], output_path: str, scale=512):
     shape = img.shape
     w = shape[0]
     h = shape[1]
-    img_resize = cv2.resize(img, (256, 256), interpolation = cv2.INTER_NEAREST)
+    img_resize = cv2.resize(img, (512, 512), interpolation = cv2.INTER_NEAREST)
     cv2.imwrite(output_path, img_resize)
     #image_tosave = Image.fromarray(img_resize[:,:, [2, 1, 0]].astype(np.uint8))
     #image_tosave.save(os.path.abspath(output_path), 'PNG')
